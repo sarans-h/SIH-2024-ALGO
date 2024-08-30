@@ -22,7 +22,7 @@ export default function ClientMenu({ active }) {
                 <NavLink to={`/dashboard/client/${id}/servicesby`}>
                     <img src={services} alt="Services" />
                     <div className="linkHeader">
-                        My Services
+                        Post or Manage Job
                     </div>
                 </NavLink>
             </div>
@@ -38,17 +38,17 @@ export default function ClientMenu({ active }) {
                 <NavLink to={`/dashboard/client/${id}/orders`}>
                     <img src={services} alt="Orders" />
                     <div className="linkHeader">
-                        My Orders
+                        View Job Status
                     </div>
                 </NavLink>
             </div>
-            <div className={active === "chat" ? 'link active' : 'link'}>
-                <NavLink to={``}>
+            <div className={active == "chat" ? 'link active' : 'link'}>
+                <a href={`/dashboard/client/${id}/chat`}>
                     <img src={chat} alt="Chat" />
                     <div className="linkHeader">
                         Chat Room
                     </div>
-                </NavLink>
+                </a>
             </div>
             <div className={active === "profile" ? 'link active' : 'link'}>
                 <NavLink to={`/dashboard/client/${id}/profile`}>

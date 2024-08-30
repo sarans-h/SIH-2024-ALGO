@@ -201,6 +201,40 @@ export default function ServiceDetails({ type }) {
             }, 1000);
         })
     }
+    const handleAssign = () => {
+        setLoading(true)
+        dispatch(makeOrder(serviceId)).unwrap().then(data => {
+            setTimeout(() => {
+                setLoading(false)
+                if (data.status == 200) {
+                    toast.success(data.msg)
+                    navigate(`/dashboard/client/${id}/orders`)
+                }
+                else if (data.status == 400) {
+                    toast.info(data.msg)
+                    fetchData()
+                }
+                else if (data.status == 403) {
+                    toast.error(data.msg)
+                    navigate('/login')
+                }
+                else if (data.status == 404) {
+                    toast.error(data.msg)
+                    navigate('/404')
+                }
+                else {
+                    toast.error(data.msg)
+                    fetchData()
+                }
+            }, 1000);
+        }).catch((rejectedValueOrSerializedError) => {
+            setTimeout(() => {
+                setLoading(false)
+                toast.error(rejectedValueOrSerializedError)
+                fetchData()
+            }, 1000);
+        })
+    }
     const handleUpdate = (e) => {
         setLoading(true)
         const status = e.target.name
@@ -290,9 +324,9 @@ export default function ServiceDetails({ type }) {
                                                 <>
                                                     <div className="bottom-buttons">
                                                     {
-                                                    data.selectedService.userId.role==='freelancer'? <> <button onClick={handleApply}>Apply</button>
-                                                    <HashLink className="go-back-button" to={`/dashboard/client/${id}/freelancers`}><button>Go Back</button></HashLink>
-                                                    </>:<HashLink className="go-back-button" to={`/dashboard/client/${id}/servicesby`}><button>Go Back</button></HashLink>
+                                                        data.selectedService.userId.role==='freelancer'? <> <button onClick={handleAssign}>Assign a Job</button>
+                                                        <HashLink className="go-back-button" to={`/dashboard/client/${id}/freelancers`}><button>Go Back</button></HashLink>
+                                                        </>:<HashLink className="go-back-button" to={`/dashboard/client/${id}/servicesby`}><button>Go Back</button></HashLink>
                                                     }
                                                     </div>
                                                 </>

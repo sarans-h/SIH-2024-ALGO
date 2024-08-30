@@ -41,10 +41,12 @@ export default function FreelancerMenu({ active }) {
                 </NavLink>
             </div>
             <div className={active == "chat" ? 'link active' : 'link'}>
+                <NavLink to={`/dashboard/freelancer/${id}/chat`}>
                     <img src={chat} alt="Chat" />
                     <div className="linkHeader">
                         Chat Room
                     </div>
+                </NavLink>
             </div>
             <div className={active == "profile" ? 'link active' : 'link'}>
                 <NavLink to={`/dashboard/freelancer/${id}/profile`}>

@@ -42,10 +42,11 @@ export default function ClientServices() {
       {loading && <Loading />}
       <div className='FreelancerServices'>
         <div className="container">
+          <ClientMenu active="services" />
           <div className="section">
             <div className="buttons">
-              <HashLink to={`/dashboard/client/${id}/servicesby/create`}><button>Create Service</button></HashLink>
-              <HashLink to={`/dashboard/client/${id}/servicesby/manage`}><button>Manage Services</button></HashLink>
+              <HashLink to={`/dashboard/client/${id}/servicesby/create`}><button>Post Job</button></HashLink>
+              <HashLink to={`/dashboard/client/${id}/servicesby/manage`}><button>Manage Job</button></HashLink>
             </div>
             <div className="services">
               {data?.allServices && data.allServices.length != 0 ? data.allServices.map(service => <div key={service._id} className="service">
@@ -81,7 +82,6 @@ export default function ClientServices() {
             ) : <div className='noServices'>No Service for the moment</div>}
             </div>
           </div>
-          <ClientMenu active="services" />
         </div>
       </div>
     </>

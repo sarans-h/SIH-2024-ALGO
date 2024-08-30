@@ -8,6 +8,7 @@ const ServiceModel = new Schema(
     price: Number,
     images: String,
     userId: Schema.Types.ObjectId,
+    applications:[]
   },
   { timestamps: true }
 );

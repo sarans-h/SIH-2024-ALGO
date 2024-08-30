@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import PageNotFound from "./components/PageNotFound";
 import Signup from "./components/Signup";
+import Chat from "./components/Chat";
 import Profile from "./components/Profile";
 
 import FreelancerDashboard from "./components/FreelancerComponents/FreelancerDashboard";
@@ -69,6 +70,10 @@ function App() {
               element={<ServiceDetails type="3" />}
             />
             <Route
+              path="/dashboard/freelancer/:id/chat"
+              element={<Chat type="freelancer" />}
+            />
+            <Route
               path="/dashboard/freelancer/:id/profile"
               element={<Profile type="1" />}
             />
@@ -106,6 +111,10 @@ function App() {
             <Route
               path="/dashboard/client/:id/order/show/:serviceId"
               element={<ServiceDetails type="3" />}
+            />
+            <Route
+              path="/dashboard/client/:id/chat"
+              element={<Chat type="2" />}
             />
             <Route
               path="/dashboard/client/:id/profile"

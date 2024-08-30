@@ -10,7 +10,7 @@ const UserModel = new Schema(
     password: String,
     role: String,
     image: { type: String, default: null },
-    desc: { type: String, default: '' }, // Added desc field
+    desc: { type: String, default: '' }, 
   },
   { timestamps: true }
 );

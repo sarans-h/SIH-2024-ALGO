@@ -3,6 +3,7 @@ const Service = require("../models/serviceModel");
 const { getServiceRating } = require("./TestimonialsController");
 const { findServiceById } = require("./ServicesController");
 const { findUserById } = require("./UserController");
+const { sendMessage } = require("./ChatController");
 
 const findUserServices = async (userId) => {
   const user = await findUserById(userId);
@@ -130,8 +131,8 @@ const makeOrder = async (clientId, serviceId) => {
       if (orderExists.length != 0) {
         return "You Already Have A Uncompleted Order For This Service";
       }
-      // const text = `Hello,I would like to order ${selectedService.title} service`;
-      // sendMessage(clientId, selectedService.userId, text);
+      const text = `Hello,I would like to order ${selectedService.title} service`;
+      sendMessage(clientId, selectedService.userId, text);
       const createdOrder = Order.create({
         clientId: selectedClient._id,
         serviceId: selectedService._id,
@@ -145,6 +146,7 @@ const makeOrder = async (clientId, serviceId) => {
 
 const applyJob = async (Id, serviceId) => {
   const selectedFree = await findUserById(Id);
+  const selectedService=await findServiceById(serviceId);
   if (selectedFree) {
     if (selectedFree.role != "freelancer") {
       return "You Don't Have Permission";
@@ -159,12 +161,13 @@ const applyJob = async (Id, serviceId) => {
       if (orderExists.length != 0) {
         return "You Already Have A Uncompleted Order For This Service";
       }
-      // const text = `Hello,I would like to order ${selectedService.title} service`;
-      // sendMessage(clientId, selectedService.userId, text);
       const createdOrder = Order.create({
         clientId: selectedFree._id,
         serviceId: selectedJob._id,
       });
+
+      selectedService.applications.push(Id);
+      console.log(selectedService.applications)
       return "Order Made Successfully";
     }
     return "Service Doesn't Exists";
@@ -208,5 +211,4 @@ module.exports = {
   findOrder,
   createService,
   applyJob
-
 };
